@@ -32,9 +32,14 @@ app.get('/topic/:id', function(req, res){
             if(err){
                 res.status(500).send('There is an error\n status:500');
             }
-            res.render('view', {topics: files, title: data});
+            res.render('view', {topics: files, title: id, description: data});
         })
     })  
+})
+app.get('/topic/', function(req, res){
+    fs.readdir('data', function(err, files){
+        res.redirect('/topic/' + files[0]);
+    })
 })
 app.get('/', function(req, res){
     res.send('Hello world!');
